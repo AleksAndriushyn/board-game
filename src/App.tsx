@@ -1,11 +1,9 @@
-import { Button, MenuItem, Select } from '@mui/material';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
 import { useEffect, useState } from 'react';
 import './App.css';
 import Board from './components/Board';
+import FormActions from './components/FormActions';
 import { getFields } from './functions/funcs';
-import { Field, Cell } from './types';
+import { Cell, Field } from './types';
 
 function App() {
 	const [fields, setFields] = useState<Field[]>([]);
@@ -20,34 +18,13 @@ function App() {
 	return (
 		<div className='container'>
 			<div>
-				<div className='actions'>
-					<FormControl>
-						<InputLabel>Pick mode</InputLabel>
-						<Select
-							style={{ width: '170px' }}
-							value={field.name ?? ''}
-							label='Pick mode'
-							onChange={(value) => {
-								setField({
-									field:
-										fields.find((el) => el.name === value.target.value)
-											?.field ?? 0,
-									name: value.target.value,
-								});
-								setStart(false);
-								setSelectedCells([]);
-							}}>
-							{fields.map((field: Field) => (
-								<MenuItem key={field.field} value={field.name}>
-									{field.name} ({field.field}x{field.field})
-								</MenuItem>
-							))}
-						</Select>
-					</FormControl>
-					<Button variant={'contained'} onClick={() => setStart(true)}>
-						Start
-					</Button>
-				</div>
+				<FormActions
+					fields={fields}
+					field={field}
+					setStart={setStart}
+					setField={setField}
+					setSelectedCells={setSelectedCells}
+				/>
 				{start && (
 					<Board
 						selectedCells={selectedCells}
@@ -61,7 +38,7 @@ function App() {
 				<ul className='cells-list'>
 					{selectedCells.map((cell: Cell, idx: number) => (
 						<li className='cell' key={`${cell.row}${cell.col}${idx}`}>
-							row {cell.row} col {cell.col}
+							row {cell.row + 1} col {cell.col + 1}
 						</li>
 					))}
 				</ul>
@@ -71,5 +48,4 @@ function App() {
 }
 
 export default App;
-
 
