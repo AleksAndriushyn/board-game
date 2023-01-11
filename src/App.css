@@ -1,0 +1,36 @@
+.container {
+	display: flex;
+	margin-top: 50px;
+	justify-content: center;
+}
+
+.actions {
+	margin-bottom: 20px;
+	display: flex;
+	gap: 30px;
+	justify-content: center;
+	align-items: 'center';
+}
+
+.result-block {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-left: 15px;
+}
+
+.cells-list {
+	display: grid;
+	grid-template-columns: repeat(5, 2fr);
+	gap: 5px;
+}
+
+.cell {
+	list-style-type: none;
+	background-color: #fbf8e3;
+	padding: 10px;
+	margin-bottom: 5px;
+	width: 50px;
+	color: #998052;
+}
+
